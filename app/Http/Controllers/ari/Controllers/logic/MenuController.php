@@ -1,33 +1,32 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ midEA.
  * User: HXL
  * Date: 2018/6/13
- * Time: 14:07
+ * Time: 15:51
  */
-namespace App\Http\Controllers\ari\Controllers;
+namespace App\Http\Controllers\ari\Controllers\logic;
 
 use app\Exceptions\Codes;
 use app\Exceptions\Msg;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
 
-class RoleController extends BaseController{
-
+class MenuController extends BaseController{
     public function index(){
-        $data = $this->roles()->page();
+        $data = $this->menus()->page();
         $result['code'] = Codes::system_ok;
         $result['data'] = $data;
-        $result['url'] = 'ari/role/index';
+        $result['url'] = 'ari/menu/index';
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据mid值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
-        $data = $this->roles()->select($where);
+        $mid = Input::get('mid');
+        $where = array('mid'=>$mid);
+        $data = $this->menus()->select($where);
         echo json_encode($data);
     }
 
@@ -40,14 +39,14 @@ class RoleController extends BaseController{
         //var_dump($data);exit();
         $data['create_time'] = date('Y-m-d', time());
         unset($data['_token']);
-        $add = $this->roles()->add($data);
+        $add = $this->menus()->add($data);
         if(!$add){
             $result['code'] = Codes::system_fail;
             $result['msg'] = Msg::add_fail;
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::add_ok;
-            $result['url'] = 'ari/role/index';
+            $result['url'] = 'ari/menu/index';
         }
         //var_dump($result);exit();
         return $this->jsonReturn($result);
@@ -58,9 +57,9 @@ class RoleController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
-        $find = $this->roles()->findBy($where);
+        $mid = $this->input('mid');
+        $where = array('mid'=>$mid);
+        $find = $this->menus()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
             $result['msg'] = Msg::user_unexisted;
@@ -69,14 +68,14 @@ class RoleController extends BaseController{
         $data = request()->input();
         //var_dump($data);
         unset($data['_token']);
-        $edit = $this->roles()->edit($data, $where);
+        $edit = $this->menus()->edit($data, $where);
         if(!$edit){
             $result['code'] = Codes::system_fail;
             $result['msg'] = Msg::edit_fail;
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::edit_ok;
-            $result['url'] = 'ari/role/index';
+            $result['url'] = 'ari/menu/index';
         }
         return $this->jsonReturn($result);
 
@@ -87,22 +86,22 @@ class RoleController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
-        $find = $this->roles()->findBy($where);
+        $mid = $this->input('mid');
+        $where = array('mid'=>$mid);
+        $find = $this->menus()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
             $result['msg'] = Msg::user_unexisted;
             return $this->jsonReturn($result);
         }
-        $del = $this->roles()->del($where);
+        $del = $this->menus()->del($where);
         if(!$del){
             $result['code'] = Codes::system_fail;
             $result['msg'] = Msg::del_fail;
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::del_ok;
-            $result['url'] = 'ari/role/index';
+            $result['url'] = 'ari/menu/index';
         }
 
         return $this->jsonReturn($result);

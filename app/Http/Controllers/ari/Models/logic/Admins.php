@@ -5,14 +5,14 @@
  * Date: 2018/6/12
  * Time: 13:47
  */
-namespace App\Http\Controllers\ari\Models;
+namespace App\Http\Controllers\ari\Models\logic;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
 class Admins extends Model{
 
-    protected $tableName = 'admins';
+    protected $tableName = 'users';
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();
@@ -61,6 +61,7 @@ class Admins extends Model{
         $del = DB::table($this->tableName)->where($where)->delete();
         return $del;
     }
+
 
 
 }

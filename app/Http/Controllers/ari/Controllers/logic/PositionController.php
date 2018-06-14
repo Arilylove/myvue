@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ pidEA.
  * User: HXL
  * Date: 2018/6/13
  * Time: 15:52
  */
-namespace App\Http\Controllers\ari\Controllers;
+namespace App\Http\Controllers\ari\Controllers\logic;
 
 use app\Exceptions\Codes;
 use app\Exceptions\Msg;
@@ -21,11 +21,11 @@ class PositionController extends BaseController{
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据pid值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
+        $pid = Input::get('pid');
+        $where = array('pid'=>$pid);
         $data = $this->positions()->select($where);
         echo json_encode($data);
     }
@@ -57,8 +57,8 @@ class PositionController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
+        $pid = $this->input('pid');
+        $where = array('pid'=>$pid);
         $find = $this->positions()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
@@ -86,8 +86,8 @@ class PositionController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
+        $pid = $this->input('pid');
+        $where = array('pid'=>$pid);
         $find = $this->positions()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;

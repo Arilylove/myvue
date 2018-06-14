@@ -2,15 +2,15 @@
 /**
  * Created by IntelliJ IDEA.
  * User: HXL
- * Date: 2018/6/13
- * Time: 15:28
+ * Date: 2018/6/14
+ * Time: 15:14
  */
-namespace App\Http\Controllers\ari\Models;
+namespace App\Http\Controllers\ari\Models\logic;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Positions extends Model{
-    protected $tableName = 'positions';
+class RoleMenus extends Model{
+    protected $tableName = 'role_menus';
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ didEA.
  * User: HXL
  * Date: 2018/6/13
  * Time: 15:51
@@ -21,11 +21,11 @@ class DemandController extends BaseController{
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据did值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
+        $did = Input::get('did');
+        $where = array('did'=>$did);
         $data = $this->demands()->select($where);
         echo json_encode($data);
     }
@@ -57,8 +57,8 @@ class DemandController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
+        $did = $this->input('did');
+        $where = array('did'=>$did);
         $find = $this->demands()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
@@ -86,8 +86,8 @@ class DemandController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
+        $did = $this->input('did');
+        $where = array('did'=>$did);
         $find = $this->demands()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;

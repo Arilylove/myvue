@@ -3,14 +3,14 @@
  * Created by IntelliJ IDEA.
  * User: HXL
  * Date: 2018/6/13
- * Time: 15:31
+ * Time: 14:44
  */
-namespace App\Http\Controllers\ari\Models;
+namespace App\Http\Controllers\ari\Models\logic;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Receipts extends Model{
-    protected $tableName = 'receipts';
+class Roles extends Model{
+    protected $tableName = 'roles';
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();

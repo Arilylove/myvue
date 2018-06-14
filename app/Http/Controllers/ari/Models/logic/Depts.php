@@ -3,14 +3,14 @@
  * Created by IntelliJ IDEA.
  * User: HXL
  * Date: 2018/6/13
- * Time: 15:29
+ * Time: 14:43
  */
-namespace App\Http\Controllers\ari\Models;
+namespace App\Http\Controllers\ari\Models\logic;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Menus extends Model{
-    protected $tableName = 'menus';
+class Depts extends Model{
+    protected $tableName = 'depts';
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();

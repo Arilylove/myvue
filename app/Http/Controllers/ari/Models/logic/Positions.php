@@ -3,14 +3,14 @@
  * Created by IntelliJ IDEA.
  * User: HXL
  * Date: 2018/6/13
- * Time: 14:44
+ * Time: 15:28
  */
-namespace App\Http\Controllers\ari\Models;
+namespace App\Http\Controllers\ari\Models\logic;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class Roles extends Model{
-    protected $tableName = 'roles';
+class Positions extends Model{
+    protected $tableName = 'positions';
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();

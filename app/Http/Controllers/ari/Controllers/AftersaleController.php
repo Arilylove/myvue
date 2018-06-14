@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ aidEA.
  * User: HXL
  * Date: 2018/6/13
  * Time: 15:49
@@ -21,11 +21,11 @@ class AftersaleController extends BaseController{
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据aid值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
+        $aid = Input::get('aid');
+        $where = array('aid'=>$aid);
         $data = $this->aftersales()->select($where);
         echo json_encode($data);
     }
@@ -57,8 +57,8 @@ class AftersaleController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
+        $aid = $this->input('aid');
+        $where = array('aid'=>$aid);
         $find = $this->aftersales()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
@@ -86,8 +86,8 @@ class AftersaleController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
+        $aid = $this->input('aid');
+        $where = array('aid'=>$aid);
         $find = $this->aftersales()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;

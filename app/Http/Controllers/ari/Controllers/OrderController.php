@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ oidEA.
  * User: HXL
  * Date: 2018/6/13
  * Time: 15:52
@@ -21,11 +21,11 @@ class OrderController extends BaseController{
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据oid值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
+        $oid = Input::get('oid');
+        $where = array('oid'=>$oid);
         $data = $this->orders()->select($where);
         echo json_encode($data);
     }
@@ -57,8 +57,8 @@ class OrderController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
+        $oid = $this->input('oid');
+        $where = array('oid'=>$oid);
         $find = $this->orders()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
@@ -86,8 +86,8 @@ class OrderController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
+        $oid = $this->input('oid');
+        $where = array('oid'=>$oid);
         $find = $this->orders()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;

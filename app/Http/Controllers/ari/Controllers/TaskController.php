@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by IntelliJ IDEA.
+ * Created by IntelliJ tidEA.
  * User: HXL
  * Date: 2018/6/13
  * Time: 15:53
@@ -21,11 +21,11 @@ class TaskController extends BaseController{
         return $this->jsonReturn($result);
     }
     /**
-     * 根据id值显示json数据
+     * 根据tid值显示json数据
      */
     public function one(){
-        $id = Input::get('id');
-        $where = array('id'=>$id);
+        $tid = Input::get('tid');
+        $where = array('tid'=>$tid);
         $data = $this->tasks()->select($where);
         echo json_encode($data);
     }
@@ -57,8 +57,8 @@ class TaskController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function esave(){
-        $id = $this->input('id');
-        $where = array('uid'=>$id);
+        $tid = $this->input('tid');
+        $where = array('tid'=>$tid);
         $find = $this->tasks()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
@@ -86,8 +86,8 @@ class TaskController extends BaseController{
      * @return \Illuminate\Http\JsonResponse
      */
     public function del(){
-        $id = $this->input('id');
-        $where = array('id'=>$id);
+        $tid = $this->input('tid');
+        $where = array('tid'=>$tid);
         $find = $this->tasks()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
