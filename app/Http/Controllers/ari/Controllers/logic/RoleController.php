@@ -64,7 +64,7 @@ class RoleController extends BaseController{
         $find = $this->roles()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::role_unexisted;
             return $this->jsonReturn($result);
         }
         $data = request()->input();
@@ -93,7 +93,7 @@ class RoleController extends BaseController{
         $find = $this->roles()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::role_unexisted;
             return $this->jsonReturn($result);
         }
         $del = $this->roles()->del($where);

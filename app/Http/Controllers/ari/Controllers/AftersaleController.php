@@ -62,7 +62,7 @@ class AftersaleController extends BaseController{
         $find = $this->aftersales()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::aftersale_unexisted;
             return $this->jsonReturn($result);
         }
         $data = request()->input();
@@ -91,7 +91,7 @@ class AftersaleController extends BaseController{
         $find = $this->aftersales()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::aftersale_unexisted;
             return $this->jsonReturn($result);
         }
         $del = $this->aftersales()->del($where);

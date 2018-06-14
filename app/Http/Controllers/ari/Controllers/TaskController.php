@@ -62,7 +62,7 @@ class TaskController extends BaseController{
         $find = $this->tasks()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::task_unexisted;
             return $this->jsonReturn($result);
         }
         $data = request()->input();
@@ -91,7 +91,7 @@ class TaskController extends BaseController{
         $find = $this->tasks()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::task_unexisted;
             return $this->jsonReturn($result);
         }
         $del = $this->tasks()->del($where);

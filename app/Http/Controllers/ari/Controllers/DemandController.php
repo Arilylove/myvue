@@ -62,7 +62,7 @@ class DemandController extends BaseController{
         $find = $this->demands()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::demand_unexisted;
             return $this->jsonReturn($result);
         }
         $data = request()->input();
@@ -91,7 +91,7 @@ class DemandController extends BaseController{
         $find = $this->demands()->findBy($where);
         if(!$find){
             $result['code'] = Codes::system_fail;
-            $result['msg'] = Msg::user_unexisted;
+            $result['msg'] = Msg::demand_unexisted;
             return $this->jsonReturn($result);
         }
         $del = $this->demands()->del($where);
