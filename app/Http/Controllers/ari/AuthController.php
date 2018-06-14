@@ -26,20 +26,7 @@ class AuthController extends BaseController{
         $roleId = $findUser['rid'];
         //角色id，从角色表中查找用户具有的操作菜单id
         $findRole = $this->roles()->findBy(array('rid'=>$roleId));
-        //去除最后一位逗号
-        $allMenuIdString = substr($findRole['role_ways'], 0, strlen($findRole['role_ways'])-1);
-        $allMenuIdArr = explode(',', $allMenuIdString);
-        //初始化
-        $control = array();
-        $method = array();
-        //根据id查询所有菜单操作controller和method
-        for($i=0;$i<count($allMenuIdArr);$i++){
-            $menu = $this->menus()->findBy(array('mid'=>$allMenuIdArr[$i]));
-            $control[$i] = $menu['menu_control'];
-            $method[$i] = $menu['menu_method'];
-        }
-        $auth['control'] = $control;
-        $auth['method'] = $method;
+        $auth = $this->getMenuById($findRole['role_ways']);
         return $auth;
     }
 

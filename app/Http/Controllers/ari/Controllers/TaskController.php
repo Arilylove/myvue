@@ -7,8 +7,8 @@
  */
 namespace App\Http\Controllers\ari\Controllers;
 
-use app\Exceptions\Codes;
-use app\Exceptions\Msg;
+use App\Exceptions\Codes;
+use App\Exceptions\Msg;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
 
@@ -17,7 +17,7 @@ class TaskController extends BaseController{
         $data = $this->tasks()->page();
         $result['code'] = Codes::system_ok;
         $result['data'] = $data;
-        $result['url'] = 'ari/task/index';
+        //$result['url'] = 'ari/task/index';
         return $this->jsonReturn($result);
     }
     /**
@@ -46,7 +46,7 @@ class TaskController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::add_ok;
-            $result['url'] = 'ari/task/index';
+            //$result['url'] = 'ari/task/index';
         }
         //var_dump($result);exit();
         return $this->jsonReturn($result);
@@ -75,7 +75,7 @@ class TaskController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::edit_ok;
-            $result['url'] = 'ari/task/index';
+            //$result['url'] = 'ari/task/index';
         }
         return $this->jsonReturn($result);
 
@@ -101,7 +101,7 @@ class TaskController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::del_ok;
-            $result['url'] = 'ari/task/index';
+            //$result['url'] = 'ari/task/index';
         }
 
         return $this->jsonReturn($result);

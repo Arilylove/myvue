@@ -10,15 +10,16 @@ namespace App\Http\Controllers;
 use App\Common\AesCrypt;
 use app\Exceptions\Codes;
 use app\Exceptions\Msg;
-use App\Http\Controllers\ari\Models\Admins;
+use App\Http\Controllers\ari\Models\Invoices;
+use App\Http\Controllers\ari\Models\logic\Admins;
 use App\Http\Controllers\ari\Models\Aftersales;
 use App\Http\Controllers\ari\Models\Demands;
-use App\Http\Controllers\ari\Models\Depts;
-use App\Http\Controllers\ari\Models\Menus;
+use App\Http\Controllers\ari\Models\logic\Depts;
+use App\Http\Controllers\ari\Models\logic\Menus;
 use App\Http\Controllers\ari\Models\Orders;
-use App\Http\Controllers\ari\Models\Positions;
-use App\Http\Controllers\ari\Models\Receipts;
-use App\Http\Controllers\ari\Models\Roles;
+use App\Http\Controllers\ari\Models\logic\Positions;
+use App\Http\Controllers\ari\Models\logic\RoleMenus;
+use App\Http\Controllers\ari\Models\logic\Roles;
 use App\Http\Controllers\ari\Models\Tasks;
 use Illuminate\Support\Facades\Input;
 
@@ -31,7 +32,7 @@ class BaseController extends Controller{
      * 加密
      * @return Admins
      */
-    protected function aes(){
+    public function aes(){
         $aes = new AesCrypt();
         return $aes;
     }
@@ -40,7 +41,7 @@ class BaseController extends Controller{
      * 部门
      * @return Admins
      */
-    protected function depts(){
+    public function depts(){
         $depts = new Depts();
         return $depts;
     }
@@ -48,7 +49,7 @@ class BaseController extends Controller{
      * 菜单
      * @return Admins
      */
-    protected function menus(){
+    public function menus(){
         $menus = new Menus();
         return $menus;
     }
@@ -56,7 +57,7 @@ class BaseController extends Controller{
      * 职位
      * @return Admins
      */
-    protected function positions(){
+    public function positions(){
         $positions = new Positions();
         return $positions;
     }
@@ -64,7 +65,7 @@ class BaseController extends Controller{
      * 用户
      * @return Admins
      */
-    protected function admins(){
+    public function admins(){
         $admins = new Admins();
         return $admins;
     }
@@ -72,23 +73,33 @@ class BaseController extends Controller{
      * 角色
      * @return Admins
      */
-    protected function roles(){
+    public function roles(){
         $roles = new Roles();
         return $roles;
     }
+
+    /**
+     * 角色菜单联合表
+     * @return RoleMenus
+     */
+    public function roleMenus(){
+        $roleMenus = new RoleMenus();
+        return $roleMenus;
+    }
+
     /**
      * 发票
      * @return Admins
      */
-    protected function receipts(){
-        $receipts = new Receipts();
-        return $receipts;
+    public function invoices(){
+        $invoices = new Invoices();
+        return $invoices;
     }
     /**
      * 任务
      * @return Admins
      */
-    protected function tasks(){
+    public function tasks(){
         $tasks = new Tasks();
         return $tasks;
     }
@@ -96,7 +107,7 @@ class BaseController extends Controller{
      * 订单
      * @return Admins
      */
-    protected function orders(){
+    public function orders(){
         $orders = new Orders();
         return $orders;
     }
@@ -104,7 +115,7 @@ class BaseController extends Controller{
      * 售后
      * @return Admins
      */
-    protected function aftersales(){
+    public function aftersales(){
         $aftersales = new Aftersales();
         return $aftersales;
     }
@@ -112,7 +123,7 @@ class BaseController extends Controller{
      * 需求
      * @return Admins
      */
-    protected function demands(){
+    public function demands(){
         $demands = new Demands();
         return $demands;
     }
@@ -184,6 +195,26 @@ class BaseController extends Controller{
         $result = response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
         return $result;
     }
-
+    /**
+     * 由组合菜单获取权限菜单
+     * @param $roleMenus
+     */
+    public function getMenuById($roleMenuIds){
+        $control = array();
+        $method = array();
+        if($roleMenuIds != ''){
+            $roleWays = substr($roleMenuIds, 0, strlen($roleMenuIds)-1);
+            $roleWaysArr = explode(',', $roleWays);
+            $len = count($roleWaysArr);
+            for ($i=0;$i<$len;$i++){
+                $findMenu = $this->menus()->findBy(array('mid'=>$roleWaysArr[$i]));
+                $control[$i] = $findMenu['control'];
+                $method[$i] = $findMenu['method'];
+            }
+        }
+        $roles['control'] = $control;
+        $roles['method'] = $method;
+        return $roles;
+    }
 
 }

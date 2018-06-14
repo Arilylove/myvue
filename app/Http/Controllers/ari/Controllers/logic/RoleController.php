@@ -7,8 +7,8 @@
  */
 namespace App\Http\Controllers\ari\Controllers\logic;
 
-use app\Exceptions\Codes;
-use app\Exceptions\Msg;
+use App\Exceptions\Codes;
+use App\Exceptions\Msg;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
 
@@ -18,7 +18,7 @@ class RoleController extends BaseController{
         $data = $this->roles()->page();
         $result['code'] = Codes::system_ok;
         $result['data'] = $data;
-        $result['url'] = 'ari/role/index';
+        //$result['url'] = 'ari/role/index';
         return $this->jsonReturn($result);
     }
     /**
@@ -28,6 +28,7 @@ class RoleController extends BaseController{
         $rid = Input::get('rid');
         $where = array('rid'=>$rid);
         $data = $this->roles()->select($where);
+        $data = $this->dealDatas($data);
         echo json_encode($data);
     }
 
@@ -47,7 +48,7 @@ class RoleController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::add_ok;
-            $result['url'] = 'ari/role/index';
+            //$result['url'] = 'ari/role/index';
         }
         //var_dump($result);exit();
         return $this->jsonReturn($result);
@@ -76,7 +77,7 @@ class RoleController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::edit_ok;
-            $result['url'] = 'ari/role/index';
+            //$result['url'] = 'ari/role/index';
         }
         return $this->jsonReturn($result);
 
@@ -102,10 +103,39 @@ class RoleController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::del_ok;
-            $result['url'] = 'ari/role/index';
+            //$result['url'] = 'ari/role/index';
         }
 
         return $this->jsonReturn($result);
     }
+    /**
+     * 角色数据处理--多数据处理
+     */
+    private function dealDatas($datas){
+        $len = count($datas);
+        for ($i=0;$i<$len;$i++){
+            $datas[$i] = $this->dealData($datas[$i]);
+        }
+        return $datas;
+    }
+    /**
+     * 角色数据处理--单数据处理
+     */
+    private function dealData($data){
+        $len = count($data);
+        //需要的数据初始化
+        $data['menus'] = array();
+        if($len >= 1){
+            $roleWays = substr($data['role_ways'], 0, strlen($data['role_ways'])-1);
+            $roleWaysArr = explode(',', $roleWays);
+            $len = count($roleWaysArr);
+            for ($i=0;$i<$len;$i++) {
+                $findMenu = $this->menus()->findBy(array('mid' => $roleWaysArr[$i]));
+                $data['menus'] = $findMenu['menu_name'];
+            }
+        }
+        return $data;
+    }
+
 
 }

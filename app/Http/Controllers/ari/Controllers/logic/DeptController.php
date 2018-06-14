@@ -7,8 +7,8 @@
  */
 namespace App\Http\Controllers\ari\Controllers\logic;
 
-use app\Exceptions\Codes;
-use app\Exceptions\Msg;
+use App\Exceptions\Codes;
+use App\Exceptions\Msg;
 use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Input;
 
@@ -17,7 +17,7 @@ class DeptController extends BaseController{
         $data = $this->depts()->page();
         $result['code'] = Codes::system_ok;
         $result['data'] = $data;
-        $result['url'] = 'ari/dept/index';
+        //$result['url'] = 'ari/dept/index';
         return $this->jsonReturn($result);
     }
     /**
@@ -46,7 +46,7 @@ class DeptController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::add_ok;
-            $result['url'] = 'ari/dept/index';
+            //$result['url'] = 'ari/dept/index';
         }
         //var_dump($result);exit();
         return $this->jsonReturn($result);
@@ -75,7 +75,7 @@ class DeptController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::edit_ok;
-            $result['url'] = 'ari/dept/index';
+            //$result['url'] = 'ari/dept/index';
         }
         return $this->jsonReturn($result);
 
@@ -101,7 +101,7 @@ class DeptController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::del_ok;
-            $result['url'] = 'ari/dept/index';
+            //$result['url'] = 'ari/dept/index';
         }
 
         return $this->jsonReturn($result);
