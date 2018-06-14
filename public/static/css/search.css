@@ -1,0 +1,14 @@
+.bordrad{
+    border-radius:5px;
+    height:38px;
+}
+.add-btn{
+    border-radius:5px;
+}
+@media screen and (max-width:414px){
+    .forbatch{
+        display: none;
+    }
+
+}
+
