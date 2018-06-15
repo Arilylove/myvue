@@ -15,8 +15,12 @@ class Admins extends Model{
     protected $tableName = 'users';
 
     public function select($where){
-        $data = DB::table($this->tableName)->where($where)->get();
-        return $data;
+        if($where == ''){
+            $data = DB::table($this->tableName)->get();
+        }else{
+            $data = DB::table($this->tableName)->where($where)->get();
+        }
+        return (array)$data;
     }
 
     /**
@@ -25,7 +29,7 @@ class Admins extends Model{
      */
     public function page(){
         $page = DB::table($this->tableName)->paginate(10);
-        return $page;
+        return (array)$page;
     }
 
     /**
@@ -35,7 +39,7 @@ class Admins extends Model{
      */
     public function findBy($where){
         $find = DB::table($this->tableName)->where($where)->first();
-        return $find;
+        return (array)$find;
     }
 
     public function add($data){

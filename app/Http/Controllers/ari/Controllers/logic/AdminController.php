@@ -16,7 +16,9 @@ class AdminController extends BaseController{
 
     public function index(){
         $data = $this->admins()->page();
+        //var_dump($data);exit();
         $data = $this->dealDatas($data);
+        var_dump($data);exit();
         $result['code'] = Codes::system_ok;
         $result['data'] = json_encode($data);
         //$result['url'] = 'ari/admin/index';
@@ -70,7 +72,6 @@ class AdminController extends BaseController{
         }
         $data = request()->input();
         //var_dump($data);
-        unset($data['_token']);
         $edit = $this->admins()->edit($data, $where);
         if(!$edit){
             $result['code'] = Codes::system_fail;
@@ -114,9 +115,13 @@ class AdminController extends BaseController{
      * 用户数据处理--多数据处理
      */
     private function dealDatas($datas){
+        $datas = (array)$datas;
         $len = count($datas);
-        for ($i=0;$i<$len;$i++){
-            $datas[$i] = $this->dealData($datas[$i]);
+        if($len > 0){
+            for ($i=0;$i<$len;$i++){
+                var_dump($datas[$i]);exit();
+                $datas[$i] = $this->dealData($datas[$i]);
+            }
         }
         return $datas;
     }
@@ -129,7 +134,7 @@ class AdminController extends BaseController{
         $data['position'] = '';
         $data['dept'] = '';
         $data['roles'] = array();   //可能有多个角色
-        if($len >= 1){
+        if($len > 0){
             $findPosition = $this->positions()->findBy(array('dept_id'=>$data['dept_id']));
             $findDept = $this->positions()->findBy(array('dept_id'=>$data['dept_id']));
             $data['position'] = $findPosition['position_name'];

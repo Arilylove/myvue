@@ -14,7 +14,7 @@ class RoleMenus extends Model{
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();
-        return $data;
+        return (array)$data;
     }
 
     /**
@@ -23,7 +23,7 @@ class RoleMenus extends Model{
      */
     public function page(){
         $page = DB::table($this->tableName)->paginate(10);
-        return $page;
+        return (array)$page;
     }
 
     /**
@@ -33,7 +33,7 @@ class RoleMenus extends Model{
      */
     public function findBy($where){
         $find = DB::table($this->tableName)->where($where)->first();
-        return $find;
+        return (array)$find;
     }
 
     public function add($data){
