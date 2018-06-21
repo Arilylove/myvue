@@ -16,7 +16,7 @@ class InvoiceController extends BaseController{
     public function index(){
         $data = $this->invoices()->page();
         $result['code'] = Codes::system_ok;
-        $result['data'] = $data;
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/receipt/index';
         return $this->jsonReturn($result);
     }
