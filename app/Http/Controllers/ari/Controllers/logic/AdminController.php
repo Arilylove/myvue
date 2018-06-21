@@ -16,11 +16,11 @@ class AdminController extends BaseController{
 
     public function index(){
         $data = $this->admins()->page();
+        $currentPage = $data->currentPage();
+        $firstItem = $data->perPage();
         //var_dump($data);exit();
-        $data = $this->dealDatas($data);
-        var_dump($data);exit();
         $result['code'] = Codes::system_ok;
-        $result['data'] = json_encode($data);
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/admin/index';
         return $this->jsonReturn($result);
     }
@@ -32,7 +32,8 @@ class AdminController extends BaseController{
         $id = Input::get('uid');
         $where = array('uid'=>$id);
         $data = $this->admins()->select($where);
-        echo json_encode($data);
+        //json中文显示切换
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -107,43 +108,9 @@ class AdminController extends BaseController{
             $result['msg'] = Msg::del_ok;
             //$result['url'] = 'ari/admin/index';
         }
-
         return $this->jsonReturn($result);
     }
 
-    /**
-     * 用户数据处理--多数据处理
-     */
-    private function dealDatas($datas){
-        $datas = (array)$datas;
-        $len = count($datas);
-        if($len > 0){
-            for ($i=0;$i<$len;$i++){
-                var_dump($datas[$i]);exit();
-                $datas[$i] = $this->dealData($datas[$i]);
-            }
-        }
-        return $datas;
-    }
-    /**
-     * 用户数据处理--单数据处理
-     */
-    private function dealData($data){
-        $len = count($data);
-        //需要的数据初始化
-        $data['position'] = '';
-        $data['dept'] = '';
-        $data['roles'] = array();   //可能有多个角色
-        if($len > 0){
-            $findPosition = $this->positions()->findBy(array('dept_id'=>$data['dept_id']));
-            $findDept = $this->positions()->findBy(array('dept_id'=>$data['dept_id']));
-            $data['position'] = $findPosition['position_name'];
-            $data['dept'] = $findDept['dept_name'];
-            //多角色处理
-            $data['roles'] = $this->dealRoles($data['rid']);
-        }
-        return $data;
-    }
 
     /**
      * 多角色id处理->获取角色名

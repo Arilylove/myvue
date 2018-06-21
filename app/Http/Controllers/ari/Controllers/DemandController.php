@@ -27,7 +27,7 @@ class DemandController extends BaseController{
         $did = Input::get('did');
         $where = array('did'=>$did);
         $data = $this->demands()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

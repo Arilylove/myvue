@@ -16,7 +16,7 @@ class DeptController extends BaseController{
     public function index(){
         $data = $this->depts()->page();
         $result['code'] = Codes::system_ok;
-        $result['data'] = $data;
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/dept/index';
         return $this->jsonReturn($result);
     }
@@ -27,7 +27,7 @@ class DeptController extends BaseController{
         $dept_id = Input::get('dept_id');
         $where = array('dept_id'=>$dept_id);
         $data = $this->depts()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

@@ -16,7 +16,7 @@ class PositionController extends BaseController{
     public function index(){
         $data = $this->positions()->page();
         $result['code'] = Codes::system_ok;
-        $result['data'] = $data;
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/position/index';
         return $this->jsonReturn($result);
     }
@@ -27,7 +27,7 @@ class PositionController extends BaseController{
         $pid = Input::get('pid');
         $where = array('pid'=>$pid);
         $data = $this->positions()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

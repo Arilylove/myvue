@@ -27,7 +27,7 @@ class AftersaleController extends BaseController{
         $aid = Input::get('aid');
         $where = array('aid'=>$aid);
         $data = $this->aftersales()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

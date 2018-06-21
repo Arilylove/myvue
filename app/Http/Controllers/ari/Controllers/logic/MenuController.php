@@ -16,7 +16,7 @@ class MenuController extends BaseController{
     public function index(){
         $data = $this->menus()->page();
         $result['code'] = Codes::system_ok;
-        $result['data'] = $data;
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/menu/index';
         return $this->jsonReturn($result);
     }
@@ -27,7 +27,7 @@ class MenuController extends BaseController{
         $mid = Input::get('mid');
         $where = array('mid'=>$mid);
         $data = $this->menus()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

@@ -14,7 +14,7 @@ class Positions extends Model{
 
     public function select($where){
         $data = DB::table($this->tableName)->where($where)->get();
-        return (array)$data;
+        return $data;
     }
 
     /**
@@ -23,7 +23,7 @@ class Positions extends Model{
      */
     public function page(){
         $page = DB::table($this->tableName)->paginate(10);
-        return (array)$page;
+        return $page;
     }
 
     /**
@@ -33,7 +33,7 @@ class Positions extends Model{
      */
     public function findBy($where){
         $find = DB::table($this->tableName)->where($where)->first();
-        return (array)$find;
+        return $find;
     }
 
     public function add($data){

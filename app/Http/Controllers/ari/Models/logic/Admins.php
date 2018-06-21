@@ -16,20 +16,35 @@ class Admins extends Model{
 
     public function select($where){
         if($where == ''){
-            $data = DB::table($this->tableName)->get();
+            $data = DB::table($this->tableName)
+                ->join('positions', function ($join){
+                    $join->on($this->tableName.'.pid', '=', 'positions.pid');
+                })
+                ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')
+                ->get();
         }else{
-            $data = DB::table($this->tableName)->where($where)->get();
+            $data = DB::table($this->tableName)->where($where)
+                ->join('positions', function ($join){
+                    $join->on($this->tableName.'.pid', '=', 'positions.pid');
+                })
+                ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')
+                ->get();
         }
-        return (array)$data;
+        return $data;
     }
 
     /**
-     * 分页
+     * 分页(联合查询)
      * @return mixed
      */
     public function page(){
-        $page = DB::table($this->tableName)->paginate(10);
-        return (array)$page;
+        $page = DB::table($this->tableName)
+            ->join('positions', function ($join){
+                $join->on($this->tableName.'.pid', '=', 'positions.pid');
+            })
+            ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')
+            ->paginate(10);
+        return $page;
     }
 
     /**
@@ -39,7 +54,7 @@ class Admins extends Model{
      */
     public function findBy($where){
         $find = DB::table($this->tableName)->where($where)->first();
-        return (array)$find;
+        return $find;
     }
 
     public function add($data){

@@ -17,7 +17,7 @@ class RoleController extends BaseController{
     public function index(){
         $data = $this->roles()->page();
         $result['code'] = Codes::system_ok;
-        $result['data'] = $data;
+        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/role/index';
         return $this->jsonReturn($result);
     }
@@ -29,7 +29,7 @@ class RoleController extends BaseController{
         $where = array('rid'=>$rid);
         $data = $this->roles()->select($where);
         $data = $this->dealDatas($data);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

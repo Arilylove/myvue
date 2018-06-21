@@ -27,7 +27,7 @@ class OrderController extends BaseController{
         $oid = Input::get('oid');
         $where = array('oid'=>$oid);
         $data = $this->orders()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

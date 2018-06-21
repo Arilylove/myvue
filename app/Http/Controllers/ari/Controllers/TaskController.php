@@ -27,7 +27,7 @@ class TaskController extends BaseController{
         $tid = Input::get('tid');
         $where = array('tid'=>$tid);
         $data = $this->tasks()->select($where);
-        echo json_encode($data);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**
