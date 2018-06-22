@@ -20,6 +20,7 @@ class AdminController extends BaseController{
         $firstItem = $data->perPage();
         //var_dump($data);exit();
         $result['code'] = Codes::system_ok;
+        $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/admin/index';
         return $this->jsonReturn($result);
@@ -44,7 +45,9 @@ class AdminController extends BaseController{
         $data = request()->input();
         //var_dump($data);exit();
         $data['create_time'] = date('Y-m-d', time());
-        unset($data['_token']);
+        //密码加密
+        $data['password'] = $this->aes()->encrypt('123456');
+        //unset($data['_token']);
         $add = $this->admins()->add($data);
         if(!$add){
             $result['code'] = Codes::system_fail;
