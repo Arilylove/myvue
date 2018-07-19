@@ -7,10 +7,10 @@
  */
 namespace App\Http\Controllers\ari\Models\logic;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\ari\Models\BaseModel;
 use DB;
 
-class Admins extends Model{
+class Admins extends BaseModel {
 
     protected $tableName = 'users';
 
@@ -38,48 +38,17 @@ class Admins extends Model{
      * @return mixed
      */
     public function page(){
+        $num = 10;
         $page = DB::table($this->tableName)
             ->join('positions', function ($join){
                 $join->on($this->tableName.'.pid', '=', 'positions.pid');
             })
             ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')
-            ->paginate(10);
+            ->paginate($num);
         return $page;
     }
 
-    /**
-     * 根据条件查找一条数据
-     * @param $where
-     * @return mixed
-     */
-    public function findBy($where){
-        $find = DB::table($this->tableName)->where($where)->first();
-        return $find;
-    }
 
-    public function add($data){
-        $add = DB::table($this->tableName)->insert($data);
-        return $add;
-    }
-
-    /**
-     * 插入一条数据并返回插入数据的id值（含有自增id值）
-     * @param $data
-     */
-    public function insertId($data){
-        $id = DB::table($this->tableName)->insertGetId($data);
-        return $id;
-    }
-
-    public function edit($data, $where){
-        $update = DB::table($this->tableName)->where($where)->update($data);
-        return $update;
-    }
-
-    public function del($where){
-        $del = DB::table($this->tableName)->where($where)->delete();
-        return $del;
-    }
 
 
 

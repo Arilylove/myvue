@@ -55,7 +55,6 @@ class AdminController extends BaseController{
         }else{
             $result['code'] = Codes::system_ok;
             $result['msg'] = Msg::add_ok;
-            //$result['url'] = 'ari/admin/index';
         }
         //var_dump($result);exit();
         return $this->jsonReturn($result);
