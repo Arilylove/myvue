@@ -5,7 +5,7 @@
  * Date: 2018/6/12
  * Time: 15:38
  */
-namespace app\Exceptions;
+namespace App\Exceptions;
 
 class Codes{
     //返回代码

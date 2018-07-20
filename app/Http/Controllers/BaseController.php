@@ -42,7 +42,7 @@ class BaseController extends Controller{
         $data['password'] = Input::get('password');
         //$data['code'] = Input::get('code');
         //var_dump($data);exit();
-        $encrypt = $this->aes()->encrypt($data['password']);
+        $encrypt = AesCrypt::encrypt($data['password']);
         $findUser = (array)$this->admins()->findBy(array('username'=>$data['username']));
         //var_dump($findUser);exit();
         //var_dump(Session::get('verifycode'));exit();
@@ -144,14 +144,6 @@ class BaseController extends Controller{
         return $roles;
     }
 
-    /**
-     * 加密
-     * @return Admins
-     */
-    public function aes(){
-        $aes = new AesCrypt();
-        return $aes;
-    }
 
     /**
      * 部门
