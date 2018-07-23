@@ -16,6 +16,7 @@ class OrderController extends BaseController{
     public function index(){
         $data = $this->orders()->page();
         $result['code'] = Codes::system_ok;
+        $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
        // $result['url'] = 'ari/order/index';
         return $this->jsonReturn($result);

@@ -23,6 +23,7 @@ class AdminController extends BaseController{
         $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/admin/index';
+        //var_dump($data->lastItem());exit();
         return $this->jsonReturn($result);
     }
 

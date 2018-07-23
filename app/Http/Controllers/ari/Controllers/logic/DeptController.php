@@ -16,8 +16,10 @@ class DeptController extends BaseController{
     public function index(){
         $data = $this->depts()->page();
         $result['code'] = Codes::system_ok;
+        $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/dept/index';
+        var_dump($result);exit();
         return $this->jsonReturn($result);
     }
     /**
@@ -38,7 +40,7 @@ class DeptController extends BaseController{
         $data = request()->input();
         //var_dump($data);exit();
         $data['create_time'] = date('Y-m-d', time());
-        unset($data['_token']);
+        //unset($data['_token']);
         $add = $this->depts()->add($data);
         if(!$add){
             $result['code'] = Codes::system_fail;
@@ -103,7 +105,6 @@ class DeptController extends BaseController{
             $result['msg'] = Msg::del_ok;
             //$result['url'] = 'ari/dept/index';
         }
-
         return $this->jsonReturn($result);
     }
 

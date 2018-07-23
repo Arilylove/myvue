@@ -16,6 +16,7 @@ class DemandController extends BaseController{
     public function index(){
         $data = $this->demands()->page();
         $result['code'] = Codes::system_ok;
+        $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/demand/index';
         return $this->jsonReturn($result);

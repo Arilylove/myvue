@@ -16,6 +16,7 @@ class AftersaleController extends BaseController{
     public function index(){
         $data = $this->aftersales()->page();
         $result['code'] = Codes::system_ok;
+        $result['msg'] = '';
         $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
         //$result['url'] = 'ari/aftersale/index';
         return $this->jsonReturn($result);
