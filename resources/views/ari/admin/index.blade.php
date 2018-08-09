@@ -100,7 +100,7 @@
                           <td>表计组</td>
                           @endif
                           <td style="text-align: center;">
-                            <a href="{{ url('b/user/update') }}" onclick="edit($v->uid)" title="修改" class="glyphicon glyphicon-edit" style="color: #00a0e9;font-size: 18px;"></a>&nbsp;&nbsp;
+                            <a href="{{ url('b/user/update') }}" onclick=edit("{{ $v->uid }}") title="修改" class="glyphicon glyphicon-edit" style="color: #00a0e9;font-size: 18px;"></a>&nbsp;&nbsp;
                             <a href="javascript:void (0);" title="删除" class="glyphicon glyphicon-remove class-del" onclick=confirmDel("{{ $v->uid }}") style="color: red;font-size: 18px;"></a>
                           </td>
                         </tr>
