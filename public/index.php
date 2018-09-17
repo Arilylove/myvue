@@ -56,3 +56,9 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+/*//跨域设置
+header('content-type:application:json;charset=utf8');
+header('Access-Control-Allow-Origin:*');   // 指定允许其他域名访问
+// 响应类型
+header('Access-Control-Allow-Methods:POST,GET');
+header('Access-Control-Allow-Headers:x-requested-with,content-type');// 响应头设置*/

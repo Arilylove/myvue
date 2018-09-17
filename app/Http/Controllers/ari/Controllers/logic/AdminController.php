@@ -18,10 +18,12 @@ class AdminController extends BaseController{
         $data = $this->admins()->page();
         $currentPage = $data->currentPage();
         $firstItem = $data->perPage();
+//        $data = array();
         //var_dump($data);exit();
         $result['code'] = Codes::system_ok;
         $result['msg'] = '';
-        $result['data'] = json_encode($data, JSON_UNESCAPED_UNICODE);
+//        $result['data'] = json_encode($data);
+        $result['data'] = $data;
         //$result['url'] = 'ari/admin/index';
         //var_dump($data->lastItem());exit();
         return $this->jsonReturn($result);
@@ -35,7 +37,8 @@ class AdminController extends BaseController{
         $where = array('uid'=>$id);
         $data = $this->admins()->select($where);
         //json中文显示切换
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        return $this->jsonReturn($data);
+//        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     /**

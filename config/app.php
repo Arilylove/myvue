@@ -119,10 +119,14 @@ return [
     | Available Settings: "single", "daily", "syslog", "errorlog"
     |
     */
+    //修改为-》按天记录
+    'log' => env('APP_LOG', 'daily'),
 
-    'log' => env('APP_LOG', 'single'),
+    //记录debug层次的日志信息
+//    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    //debug、info、notice、warning、error、critical、alert、emergency 有这些层次的日志可以记录 ->修改
+    'log_level' => env('APP_LOG_LEVEL', ['info', 'error', 'debug', 'emergency', 'critical']),
 
     /*
     |--------------------------------------------------------------------------

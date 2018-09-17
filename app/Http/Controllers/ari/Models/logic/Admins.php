@@ -40,10 +40,10 @@ class Admins extends BaseModel {
     public function page(){
         $num = 10;
         $page = DB::table($this->tableName)
-            ->join('positions', function ($join){
+           /* ->join('positions', function ($join){
                 $join->on($this->tableName.'.pid', '=', 'positions.pid');
             })
-            ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')
+            ->leftJoin('depts', $this->tableName.'.dept_id', '=', 'depts.did')*/
             ->paginate($num);
         return $page;
     }
